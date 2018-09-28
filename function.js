@@ -573,10 +573,10 @@ x => {
     return sum;
 }
 var yyy = xxxxxxxxxx => ({ //疑问，，，，，，，，，
-    foo: xxxxxxxxxx
+    foxx: 1
 });
 
-console.log('yyy=' + yyy);
+console.log('yyy=' + yyy().foxx);
 var obj = {
     birth: 1990,
     getAge: function () {

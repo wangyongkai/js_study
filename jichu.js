@@ -47,3 +47,15 @@ forEach方法，它接收一个函数，每次迭代就自动回调该函数。
 * JSON.stringify方法
 
 */
+
+var a;
+
+function test() {
+              if (a) {} else {
+                            console.log('====================');
+              }
+
+}
+
+test();
+console.log(a); //undefined
