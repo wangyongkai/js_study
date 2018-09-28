@@ -23,10 +23,11 @@ console.log('abs(10, blablabla)=' + abs(10, 'blablabla'));
 console.log('abs(-9, haha, hehe, null)=' + abs(-9, 'haha', 'hehe', null));
 console.log('abs()=' + abs());
 
-
+//--typeof---------------------------------------------------------------------------
 function abs1(x) {
+    console.log('typeof:' + (typeof x));
     if (typeof x !== 'number') { //如何判断是不是数字
-        throw 'Not a number';
+        //throw 'Not a number';
     }
     if (x >= 0) {
         return x;
@@ -35,9 +36,29 @@ function abs1(x) {
     }
 }
 
+abs1(111);
+abs1(true);
+abs1('true');
+abs1(function () {
+
+});
+abs1([1, 2, 3]);
+//abs1(aaa); //这样执行会报错 因为aaa没有定义就传给方法abs1
+console.log('typeofaaa:' + (typeof aaa)); //直接执行不报错。因为typeof 有undefined 类型结果
+
+// typeof 运算符把类型信息当作字符串返回。typeof 返回值有六种可能： "number," "string," "boolean," "object," "function," 和
+//  "undefined."我们可以使用typeof来获取一个变量是否存在，如if(typeof a!="undefined"){}，而不要去使用if(a)因为如果a不存在（未声明）
+//  则会出错，对于Array,Null等特殊对象使用typeof一律返回object，这正是typeof的局限性。
+//-----------------------------------------------------------------------------
 
 
-//arguments 只在函数内部起作用，并且永远指向当前函数的调用者传入的所有参数。arguments类似Array但它不是一个Array
+
+
+
+
+
+//arguments-----------------------------------------------------------------------------
+//只在函数内部起作用，并且永远指向当前函数的调用者传入的所有参数。arguments类似Array但它不是一个Array
 //最常用于判断传入参数的个数
 function foo(x) {
     console.log('x = ' + x); // 10
@@ -63,33 +84,33 @@ function foo1(a, b) {
 }
 
 foo1(1, 2, 3, 4);
+//-----------------------------------------------------------------------------
 
-
-//ES6标准引入了rest参数
+//ES6标准引入了rest参数------------------------------------------------------------
 function foo2(a, b, ...rest) {
     console.log(rest);
-    console.log('a = ' + a);
-    console.log('b = ' + b);
+    console.log('rest a = ' + a);
+    console.log('reset b = ' + b);
 
 }
 
 foo2(1, 2, 3, 4, 5);
 foo2(1);
+//-----------------------------------------------------------------------------
 
 
-
-//小心你的return语句
+//小心你的return语句-------------------------------------------------------------
 function foo3() {
     return; // 自动添加了分号，相当于return undefined;
     { // 这里不会自动加分号，因为{表示语句尚未结束
         name: 'foo3'
     }; // 这行语句已经没法执行到了
 }
+//-----------------------------------------------------------------------------
 
 
 
-
-//变量访问范围
+//变量访问范围--------------------------------------------------------------------
 function foo4() {
     var x = 1;
 
@@ -100,7 +121,7 @@ function foo4() {
 }
 
 //foo4();
-
+//-----------------------------------------------------------------------------
 
 
 //JavaScript的函数在查找变量时从自身函数定义开始，从“内”向“外”查找。如果内部函数定义了与外部函数重名的变量，则内部函数的变量将“屏蔽”外部函数的变量。
@@ -116,7 +137,7 @@ function foo5() {
 }
 
 foo5();
-
+//-----------------------------------------------------------------------------
 
 //JavaScript的函数定义有个特点，它会先扫描整个函数体的语句，把所有申明的变量“提升”到函数顶部：提升声明，不提升赋值！
 function foo6() {
@@ -126,7 +147,7 @@ function foo6() {
 }
 
 foo6();
-
+//-----------------------------------------------------------------------------
 
 
 
@@ -134,11 +155,11 @@ foo6();
 var course = 'Learn JavaScript';
 // alert(course); // 'Learn JavaScript'
 // alert(window.course); // 'Learn JavaScript'
-
+//-----------------------------------------------------------------------------
 
 // var 作用域实际上是函数内部 for循环等语句块中是无法定义具有局部作用域的变量的
 function foo7() {
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 100; i++) { //变量i作用域在foo7中
         //
     }
     i += 100; // 仍然可以引用变量i
@@ -153,9 +174,14 @@ function foo8() {
     // SyntaxError:
     i += 1;
 }
+//-----------------------------------------------------------------------------
 
 
-//解构赋值=======================
+
+
+
+
+//解构赋值-----------------------------------------------------------------------
 var person = {
     name: '小明',
     age: 20,
@@ -174,9 +200,9 @@ var {
         city,
         zip
     }
-} = person;
+} = person; //这是蛤？定义一个匿名对象？？
 
-console.log('name=' + name);
+console.log('jiegou name=' + name);
 
 
 
@@ -205,7 +231,9 @@ function buildDate({
 }) {
     return new Date(year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second);
 }
+//-----------------------------------------------------------------------------
 
+//--this-----------------------------------------------------------------------
 var xiaofang = {
     name: '小芳',
     birth: 1990,
@@ -270,8 +298,9 @@ var xiaoming7 = {
         return getAgeFromBirth();
     }
 };
+//-----------------------------------------------------------------------------
 
-
+//---apply()-----call()--------------------------------------------------------
 //第一个参数就是需要绑定的this变量，第二个参数是Array
 function getAge() {
     var y = new Date().getFullYear();
@@ -292,7 +321,7 @@ getAge.apply(xiaoming8, []); // 25, this指向xiaoming, 参数为空
 Math.max.apply(null, [3, 5, 4]); // 5
 Math.max.call(null, 3, 5, 4); // 5
 
-
+//apply实现装饰器
 //装饰器？不改变原方法的情况下给他再加其他/的功能 覆盖老方法,
 // var count = 0;
 // var oldParseInt = parseInt; // 保存原函数parseInt  重写新函数
@@ -301,8 +330,10 @@ Math.max.call(null, 3, 5, 4); // 5
 //     count += 1;
 //     return oldParseInt.apply(null, arguments); // 调用原函数
 // };
+//-----------------------------------------------------------------------------
 
 
+//---高阶函数----map-----reduce-----------------filter---------------------------
 //高阶函数：参数是函数而不是变量。JavaScript的函数其实都指向某个变量
 function add(x, y, f) {
     return f(x) + f(y);
@@ -371,9 +402,10 @@ arr.filter(function (element, index, self) {
     console.log(self); // self就是变量arr
     return true;
 });
+//-----------------------------------------------------------------------------
 
-
-//闭包 返回值必须是function==相关参数和变量都保存在返回的function中=======================
+//闭包-------------------------------------------------------------------------- 
+//返回值必须是function==相关参数和变量都保存在返回的function中=======================
 function lazy_sum(arr) {
     var sum = function () {
         return arr.reduce(
@@ -390,7 +422,7 @@ console.log('f()====' + f()); //此时才计算结果
 
 var f1 = lazy_sum([1, 2, 3, 4, 5]);
 var f2 = lazy_sum([1, 2, 3, 4, 5]);
-console.log('f1 === f2:' + (f1 === f2)); // false
+console.log('f1 === f2:' + (f1 === f2)); // false  每个拷贝一份
 
 
 
@@ -405,7 +437,7 @@ function count() {
     return arr;
 }
 
-var results = count();
+var results = count(); //持有变量i
 var f1 = results[0];
 var f2 = results[1];
 var f3 = results[2];
@@ -519,7 +551,7 @@ var five = add(two, three);
 (five(function () {
     console.log('print 5 times');
 }))();
-
+//-----------------------------------------------------------------------------
 
 // ES6 箭头函数  箭头函数内部的this是词法作用域，就是外层调用者obj决定。
 var fn = x => x * x;
@@ -540,10 +572,11 @@ x => {
     }
     return sum;
 }
-x => ({
-    foo: x
+var yyy = xxxxxxxxxx => ({ //疑问，，，，，，，，，
+    foo: xxxxxxxxxx
 });
 
+console.log('yyy=' + yyy);
 var obj = {
     birth: 1990,
     getAge: function () {
@@ -566,7 +599,7 @@ var obj = {
     }
 };
 obj.getAge(2015); // 25
-
+//-----------------------------------------------------------------------------
 
 //generator 功能 返回多次  每次遇到yield x;就返回一个对象{value: x, done: true/false}
 function* foo(x) {
@@ -574,6 +607,8 @@ function* foo(x) {
     yield x + 2;
     return x + 3;
 }
+var fooo = foo(3);
+console.log('x+1=' + fooo.next().value);
 //斐波那契数列
 function fib(max) {
     var t, a = 0,
@@ -610,3 +645,4 @@ console.log('f.next()=' + f.next().value);
 console.log('f.next()=' + f.next().value);
 console.log('f.next()=' + f.next().value);
 console.log('f.next()=' + f.next().value);
+//-----------------------------------------------------------------------------
