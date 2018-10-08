@@ -43,8 +43,9 @@ abs1(function () {
 
 });
 abs1([1, 2, 3]);
+var aaaa;
 //abs1(aaa); //这样执行会报错 因为aaa没有定义就传给方法abs1
-console.log('typeofaaa:' + (typeof aaa)); //直接执行不报错。因为typeof 有undefined 类型结果
+console.log('typeofaaaa:' + (typeof aaaa)); //直接执行不报错。因为typeof 有undefined 类型结果  为何不是not defined  ？
 
 // typeof 运算符把类型信息当作字符串返回。typeof 返回值有六种可能： "number," "string," "boolean," "object," "function," 和
 //  "undefined."我们可以使用typeof来获取一个变量是否存在，如if(typeof a!="undefined"){}，而不要去使用if(a)因为如果a不存在（未声明）

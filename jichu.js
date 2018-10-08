@@ -57,5 +57,5 @@ function test() {
 
 }
 
-test();
+test();//如果没有var a 则报错 ReferenceError: a is not defined
 console.log(a); //undefined
