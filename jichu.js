@@ -167,10 +167,13 @@ obj1.fn1();
 
 var ggg={
   ttt:this,
-  rrr:'rrr'
+  rrr:'rrr',
+  aaa:function(){
+    console.log('ggg中的方法===', this);//此处的this指向ggg对象
+  }
 };
-console.log('ggg=======', ggg.ttt);
-
+console.log('ggg=======', ggg.ttt);//ttt却不是指向ggg对象
+ggg.aaa();
 //console.log('this=========>', this);
 
 //------------------------------------
