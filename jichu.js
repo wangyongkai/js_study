@@ -47,20 +47,37 @@ forEach方法，它接收一个函数，每次迭代就自动回调该函数。
 * JSON.stringify方法
 
 */
+
+
+//---------------------------------
+console.log(fuck);// undefined  声明提前  赋值不提前 傻
+var fuck=2;
+
+
+// let的情况；
+//console.log(bar);  // 报错
+//let bar = 2;
+//---------------------------------
+
 console.log('this=========>', this);
 var a;
 
-function test() {
+function test123() {
               if (a) {} else {
                             console.log('====================');
               }
 
 }
 
-test();//如果没有var a 则报错 ReferenceError: a is not defined
-console.log(a); //undefined
+test123();//如果没有var a 则报错 ReferenceError: a is not defined
+console.log(a); //undefined 定义 没有赋值   
+
+function test133(aaa){
+  console.log(aaa);//undefined 定义 没有赋值   
+}
 
 
+test133();
 
 
 var promise=new Promise((resole,reject)=>{//Promise内部调用了传入的函数
@@ -131,6 +148,20 @@ test();
 //结果：
 //undefined
 //ddqqqqqqqqqqqqqq
+
+// 调用对象位于作用域链的前端，局部变量（在函数内部用var声明的变量）、
+// 函数参数及Arguments对象都在函数内的作用域中——这意味着它们隐藏了作用
+// 域链更上层的任何同名的属性。 
+
+// 即，在以上程序片段中，test函数内部的“var tt='dd'”将会致使“var tt='aa'”在
+// test函数被调用时完全被隐藏。而且，tt是在第一个alert语句之后定义，所以在调用到
+// 第一个alert时，tt是还没有被赋值 的。这样说可能会清楚一点，即，在定义test函数时
+// ，当定义第一个alert(tt)时，这里会记录tt是作用域链中的一个变量但不会记录它（tt）
+// 的 值，函数定义完毕后tt就添加到作用域里，所以第一个alert语句能够找到该作用域里
+// 的tt（即，相当于找到一个已经在函数内部声明，但未被赋值的 tt）。 
+//----------------------------------------------
+
+
 
 // Javascript中的函数“在定义它们的作用域里运行，而不是在执行它们的作用域里运行”
 

@@ -35,4 +35,5 @@ function createStudent(name) {
 
 var xiaoming = createStudent('小明');
 xiaoming.run();
-console.log('xiaoming.__proto__ === Student:' + (xiaoming.__proto__ === Student));//(xiaoming.__proto__ === Student)如果不加括弧，则会先+号再计算===,而在java中无括弧编译器会报错。
+console.log('xiaoming.__proto__ === Student:' + (xiaoming.__proto__ === Student));
+//(xiaoming.__proto__ === Student)如果不加括弧，则会先+号再计算===,而在java中无括弧编译器会报错。
