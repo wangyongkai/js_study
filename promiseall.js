@@ -23,5 +23,19 @@ let p1 = new Promise((resolve, reject) => {
   })
 
 
+  var ss = [];
+
+ var n = ss.map(item => {
+    if (item%2 === 0) {
+      return item;
+    }
+  });
+
+  console.log(n);
+  Promise.all(n).then(res =>{
+    console.log('n===========0');
+  });
+
   //总结：
   //1.按数组顺序调用，一个成功了下一个才能调用，只有数组中所有都成功了才能正确走then中的输出.否则走catch失败。
+//2.数组为空数组  则直接走成功
