@@ -1,26 +1,26 @@
 let p1 = new Promise((resolve, reject) => {
     resolve('=================p1成功了');
     //reject('=================p1失败了');
-  })
+  });
   
   let p2 = new Promise((resolve, reject) => {
     //resolve('=================p2success')
     reject('=================p2failure')
-  })
+  });
   
-  let p3 = Promise.reject('=================p3失败')
+  let p3 = Promise.reject('=================p3失败');
   
   Promise.all([p1, p2]).then((result) => {
     console.log(result)               //['成功了', 'success']  
   }).catch((error) => {
     console.log(error)
-  })
+  });
   
   Promise.all([p1,p3,p2]).then((result) => {
     console.log(result)
   }).catch((error) => {
     console.log(error)      // 失败了，打出 '失败'
-  })
+  });
 
 
   var ss = [];
