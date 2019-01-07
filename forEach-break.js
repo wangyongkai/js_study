@@ -21,3 +21,7 @@ try {
     });
 } catch(e) {
 };
+
+//结论：
+//1.forEach中没有break 只能return false终止本次循环。
+//2.break可以用在for循环中。
