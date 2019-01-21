@@ -63,7 +63,7 @@ var promise=new Promise((resole,reject)=>{//Promise构造函数内部主动调�
               console.log('log1=============');
 });
 
-function Student() {
+function Student(fn) {
              // fn();
               console.log('log3=============');//构造函数体中的却执行了
           }
